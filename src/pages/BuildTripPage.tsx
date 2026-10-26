@@ -156,7 +156,7 @@ export default function BuildTripPage() {
 
     const addSuggestedStop = (stop: SuggestedStopType) => {
         const newStop: DayTripItemType = {
-            id: Date.now(), // יצירת ID זמני, יש להחליף ב-ID מהשרת לאחר השמירה
+            id: Date.now(), // Temporary ID, replaced by the server ID after saving
 
             dayTripId: Number(tripId) || 0,
 
@@ -409,10 +409,9 @@ export default function BuildTripPage() {
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                                {/* צד שמאל - טופס */}
+                                {/* Left side - form */}
                                 <div className="md:col-span-2 space-y-4">
 
-                                    {/* שם */}
                                     <input
                                         type="text"
                                         placeholder="שם הטיול"
@@ -421,7 +420,6 @@ export default function BuildTripPage() {
                                         className="border p-3 rounded-lg w-full"
                                     />
 
-                                    {/* סוג */}
                                     <select
                                         value={tripMeta.type?.id || ''}
                                         onChange={(e) => {
@@ -438,7 +436,6 @@ export default function BuildTripPage() {
                                         ))}
                                     </select>
 
-                                    {/* שעת התחלה */}
                                     <input
                                         type="time"
                                         value={tripMeta.startTime}
@@ -446,7 +443,6 @@ export default function BuildTripPage() {
                                         className="border p-3 rounded-lg w-full"
                                     />
 
-                                    {/* העלאת תמונה */}
                                     <input
                                         type="file"
                                         onChange={(e) => {
@@ -460,7 +456,7 @@ export default function BuildTripPage() {
 
                                 </div>
 
-                                {/* צד ימין - preview */}
+                                {/* Right side - preview */}
                                 <div className="flex flex-col items-center justify-start">
                                     <div className="w-full aspect-square border rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
 
@@ -486,7 +482,6 @@ export default function BuildTripPage() {
                                 </div>
                             </div>
 
-                            {/* תיאור */}
                             <textarea
                                 placeholder="תיאור הטיול"
                                 value={tripMeta.description}
@@ -651,7 +646,7 @@ export default function BuildTripPage() {
                         <div className="bg-[#ffffff] border border-[#e5e7eb] rounded-lg p-6 sticky top-24">
                             <h3 className="text-lg font-bold text-[#111827] mb-4">פעולות</h3>
                             <div className="space-y-3">
-                                {/* תצוגה מקדימה */}
+                                {/* Preview */}
                                 <button
                                     className="w-full flex items-center justify-center gap-2 bg-[#f3f4f6] text-[#111827] py-3 rounded-lg font-bold hover:bg-[#e5e7eb] transition-colors border border-[#d1d5db]"
                                 >

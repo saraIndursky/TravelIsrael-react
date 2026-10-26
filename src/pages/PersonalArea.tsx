@@ -180,8 +180,8 @@ export default function PersonalArea() {
 
     const handleProfileSave = async () => {
         try {
-            const updatedUser = await updateProfile(profile) // ניצור כזה endpoint
-            setUser(updatedUser) // לעדכן קונטקסט
+            const updatedUser = await updateProfile(profile)
+            setUser(updatedUser)
             setAlert({
                 message: "הפרטים עודכנו בהצלחה",
                 type: "success",

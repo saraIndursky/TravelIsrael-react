@@ -11,7 +11,7 @@ export default function HomePage() {
     const [featuredTrips, setFeaturedTrips] = useState<DayTripType[]>([]);
     const [selectedImage, setSelectedImage] = useState('');
 
-    // קריאה לשרת לקבלת 3 הטיולים המובילים
+    // Fetch the top 3 trips from the server
     useEffect(() => {
         const fetchTrips = async () => {
             try {

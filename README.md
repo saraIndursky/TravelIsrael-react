@@ -1,66 +1,67 @@
 # TravelIsrael — React Frontend
 
-פלטפורמת **TravelIsrael** לגלישה, תכנון ויצירת טיולים בישראל.  
-האפליקציה מאפשרת למשתמשים לגלות מסלולים קיימים, לקבל המלצות מותאמות אישית, לבנות טיול משלהם, ולנהל את הפעילות שלהם — עם פאנל ניהול מלא למנהלי המערכת.
+**TravelIsrael** is a platform for browsing, planning and creating day trips in Israel.
+Users can discover existing routes, get personalized recommendations, build their own trips
+and manage their activity, and administrators get a full management panel.
 
-> **Repository זה:** [TravelIsrael-react](https://github.com/saraIndursky/TravelIsrael-react)  
+> **This repository:** [TravelIsrael-react](https://github.com/saraIndursky/TravelIsrael-react)  
 > **Backend (.NET 8):** [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)
 
-**פרויקט לימודי** — נבנה בזוגות במסגרת קורס.
+**Course project**, built by a team of two.
 
-> **Deployment:** כרגע אין סביבת Production — ההרצה היא מקומית בלבד (Local Development).
-
----
-
-## תוכן עניינים
-
-- [תכונות עיקריות](#תכונות-עיקריות)
-- [ארכיטקטורה](#ארכיטקטורה)
-- [מסד הנתונים](#מסד-הנתונים)
-- [טכנולוגיות](#טכנולוגיות)
-- [דרישות מקדימות](#דרישות-מקדימות)
-- [התקנה והרצה](#התקנה-והרצה)
-- [חיבור ל-API](#חיבור-ל-api)
-- [צילומי מסך](#צילומי-מסך)
-- [מבנה הפרויקט](#מבנה-הפרויקט)
-- [סקריפטים](#סקריפטים)
-- [מסכים ונתיבים](#מסכים-ונתיבים)
+> **Deployment:** there is no production environment; the app runs locally only.
 
 ---
 
-## תכונות עיקריות
+## Contents
 
-### למשתמשים
-- **דף בית** — הצגת טיולים מובילים וניווט מהיר לתכנון
-- **רשימת טיולים** — חיפוש וסינון לפי אזור, סוג, קושי ופרמטרים נוספים
-- **פרטי טיול** — גלריה, תיאור, תחנות במסלול, ביקורות ודירוגים
-- **אשף תכנון טיול** — המלצות חכמות לפי:
-  - אזור גיאוגרפי
-  - רמת קושי
-  - נגישות
-  - סוג טיול
-  - העדפות (יום גשום, תקציב, שעות פנויות)
-- **בניית טיול אישי** — יצירה ועריכה של מסלול עם תחנות, הצעות חכמות ושליחה לאישור
-- **אזור אישי** — ניהול פרופיל, סטטיסטיקות וטיולים שמורים
-- **הרשמה והתחברות** — JWT עם Refresh Token אוטומטי
-
-### למנהלים
-- **Dashboard** — סטטיסטיקות כלליות
-- **ניהול טיולים** — צפייה, סינון ועריכה
-- **אישור טיולים ממתינים** — אישור / דחייה של טיולים שהמשתמשים יצרו
-- **ניהול מקומות** — הוספה, עריכה ומחיקה
-- **ניהול משתמשים** — צפייה, חסימה ומחיקה
+- [Features](#features)
+- [Architecture](#architecture)
+- [Database](#database)
+- [Tech stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Setup and running](#setup-and-running)
+- [API connection](#api-connection)
+- [Screenshots](#screenshots)
+- [Project structure](#project-structure)
+- [Scripts](#scripts)
+- [Screens and routes](#screens-and-routes)
 
 ---
 
-## ארכיטקטורה
+## Features
 
-הפרויקט בנוי כ-**Full Stack** עם הפרדה בין Client ל-Server:
+### For users
+- **Home page** — top trips and quick access to trip planning
+- **Trip catalog** — search and filter by region, type, difficulty and more
+- **Trip details** — gallery, description, route stops, reviews and ratings
+- **Trip planning wizard** — recommendations based on:
+  - region
+  - difficulty
+  - accessibility
+  - trip type
+  - preferences (rainy day, budget, available hours)
+- **Custom trip builder** — create and edit a route with stops and suggestions, then submit it for approval
+- **Personal area** — profile, statistics and saved trips
+- **Sign-up and login** — JWT with automatic token refresh
+
+### For administrators
+- **Dashboard** — overall statistics
+- **Trip management** — view, filter and edit
+- **Pending trips** — approve or reject trips created by users
+- **Place management** — add, edit and delete
+- **User management** — view, block and delete
+
+---
+
+## Architecture
+
+A full-stack application with separate client and server:
 
 ```
 ┌─────────────────────┐       HTTPS / REST API       ┌─────────────────────┐
 │   React Frontend    │  ◄────────────────────────►  │  .NET 8 Backend     │
-│   (Repository זה)   │       localhost:7081/api     │  TravelIsrael-dotnet│
+│   (this repository) │       localhost:7081/api     │  TravelIsrael-dotnet│
 └─────────────────────┘                              └──────────┬──────────┘
                                                                 │
                                                                 ▼
@@ -70,76 +71,76 @@
                                                      └─────────────────────┘
 ```
 
-| שכבה | טכנולוגיה | Repository |
+| Layer | Technology | Repository |
 |------|-----------|------------|
 | Frontend | React 19, TypeScript, Vite | `TravelIsrael-react` |
 | Backend | C# / ASP.NET Core **.NET 8** | `TravelIsrael-dotnet` |
-| Database | Microsoft SQL Server — **`ProjectTripsDB`** | ב-repo של ה-Backend |
+| Database | Microsoft SQL Server — **`ProjectTripsDB`** | in the backend repository |
 
 ---
 
-## מסד הנתונים
+## Database
 
-### איפה הנתונים נשמרים?
+### Where is the data?
 
-מסד הנתונים **`ProjectTripsDB`** **לא** נמצא בתוך repository של ה-Frontend.  
-הוא רץ על **SQL Server** (ברירת מחדל: `(localdb)\MSSQLLocalDB`) **במחשב המפתח**.
+The **`ProjectTripsDB`** database is **not** part of the frontend repository.
+It runs on **SQL Server** (default: `(localdb)\MSSQLLocalDB`) on the developer's machine.
 
-| מה | איפה |
+| What | Where |
 |----|------|
-| **הנתונים עצמם** (טיולים, מקומות, משתמשים…) | גיבוי `Database/projectTripDB.bak` ב-[TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet) — שחזור ב-SSMS |
-| **מבנה הטבלאות (Schema)** | EF Core Migrations — בתיקייה `ProjectTripsDB/Migrations/` ב-repo **[TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)** |
-| **משתמש Admin ראשוני** | נוצר אוטומטית ב-Migration (Seed) |
+| **Data** (trips, places, users…) | Backup `Database/projectTripDB.bak` in [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet), restored with SSMS |
+| **Schema** | EF Core migrations in `ProjectTripsDB/Migrations/` in [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet) |
+| **Initial admin user** | Created by a migration seed |
 
-### איך מריצים עם נתונים?
+### Running with data
 
-**שלב 1 — שחזור מסד עם נתונים (מומלץ):**
+**Step 1 — restore the database with sample data (recommended):**
 
-1. Clone את [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)
-2. ב-SSMS: **Restore Database** מ-`Database/projectTripDB.bak` → שם: `ProjectTripsDB`
-3. פירוט: [Database/README.md](https://github.com/saraIndursky/TravelIsrael-dotnet/blob/main/Database/README.md)
+1. Clone [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)
+2. In SSMS: **Restore Database** from `Database/projectTripDB.bak`, named `ProjectTripsDB`
+3. Details: [Database/README.md](https://github.com/saraIndursky/TravelIsrael-dotnet/blob/main/Database/README.md)
 
-**שלב 1 (חלופי) — רק טבלאות + Admin, בלי נתוני דוגמה:**
+**Step 1 (alternative) — tables and admin user only, without sample data:**
 
 ```bash
 dotnet ef database update --project ProjectTripsDB --startup-project ProjectTrips
 ```
 
-| שדה | ערך |
+| Field | Value |
 |-----|-----|
 | Email | `Admin@gmail.com` |
 | Password | `Admin#613` |
 
-> **חשוב:** Connection String מוגדר ב-Backend ב-`ProjectTripsDB/Models/ProjectTripsDataBase.cs`.  
-> אם SQL Server שלך רץ על שרת אחר — עדכני לפני שחזור/הרצת Migrations.
+> **Note:** the connection string is set in the backend in `ProjectTripsDB/Models/ProjectTripsDataBase.cs`.  
+> If your SQL Server runs elsewhere, update it before restoring or running migrations.
 
 ---
 
-## טכנולוגיות
+## Tech stack
 
-| קטגוריה | ספריות |
+| Category | Libraries |
 |---------|--------|
 | Framework | React 19, TypeScript |
 | Build | Vite 7 |
 | Routing | React Router DOM 7 |
 | State | Redux Toolkit |
-| HTTP | Axios (Interceptors + JWT Refresh) |
+| HTTP | Axios (interceptors + JWT refresh) |
 | Styling | Tailwind CSS 3 |
 | Icons | Lucide React, React Icons, React Feather |
 | Lint | ESLint 9 |
 
 ---
 
-## דרישות מקדימות
+## Prerequisites
 
-- [Node.js](https://nodejs.org/) (גרסה 18 ומעלה מומלצת)
+- [Node.js](https://nodejs.org/) 18 or newer
 - npm
-- **[.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)** — ל-Backend
-- **SQL Server** / **LocalDB** — מסד `ProjectTripsDB` (ראו [מסד הנתונים](#מסד-הנתונים))
+- **[.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)** for the backend
+- **SQL Server** / **LocalDB** for `ProjectTripsDB` (see [Database](#database))
 
 ---
 
-## התקנה והרצה
+## Setup and running
 
 ### 1. Clone
 
@@ -148,31 +149,31 @@ git clone https://github.com/saraIndursky/TravelIsrael-react.git
 cd TravelIsrael-react
 ```
 
-### 2. התקנת תלויות
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. הרצת Backend + DB
+### 3. Run the backend and database
 
-1. Clone את [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)
-2. שחזרי מ-`Database/projectTripDB.bak` (ראו [מסד הנתונים](#מסד-הנתונים))
-3. הריצי את שרת ה-API:
+1. Clone [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)
+2. Restore `Database/projectTripDB.bak` (see [Database](#database))
+3. Run the API server:
 
 ```bash
 dotnet run --project ProjectTrips
 ```
 
-### 4. הרצת Frontend (Development)
+### 4. Run the frontend (development)
 
 ```bash
 npm run dev
 ```
 
-האפליקציה תיפתח בכתובת: `http://localhost:5173`
+The app opens at `http://localhost:5173`.
 
-### 5. Build ל-Production (מקומי)
+### 5. Production build (local)
 
 ```bash
 npm run build
@@ -181,189 +182,187 @@ npm run preview
 
 ---
 
-## חיבור ל-API
+## API connection
 
-כתובת ה-API מוגדרת ב-`src/services/axios.ts`:
+The API address is set in `src/services/axios.ts`:
 
 ```typescript
 const baseURL = 'https://localhost:7081/api';
 ```
 
-> **שימי לב:** ברירת המחדל היא HTTPS על פורט `7081`.  
-> אם שרת ה-.NET שלך רץ על כתובת אחרת — עדכני את `baseURL` בהתאם.
+> **Note:** the default is HTTPS on port `7081`.  
+> If your .NET server runs on a different address, update `baseURL`.
 
-### Endpoints עיקריים (Backend)
+### Main endpoints (backend)
 
-| Controller | תיאור |
+| Controller | Description |
 |------------|--------|
-| `Auth` | הרשמה, התחברות, Refresh Token, פרופיל |
-| `User` | עדכון פרופיל, שינוי סיסמה |
-| `DayTrip` | טיולים, סינון, המלצות, יצירה |
-| `Lookups` | נתוני עזר (אזורים, קושי, נגישות) |
-| `Suggestions` | הצעות תחנות לבניית מסלול |
-| `Place` / `Route` | ניהול מקומות ומסלולים |
-| `Admin` | סטטיסטיקות וניהול מערכת |
-| `Type` | סוגי טיול |
+| `Auth` | Sign-up, login, refresh token, profile |
+| `User` | Profile update, password change |
+| `DayTrip` | Trips, filtering, recommendations, creation |
+| `Lookups` | Reference data (regions, difficulty, accessibility) |
+| `Suggestions` | Stop suggestions for the trip builder |
+| `Place` / `Route` | Place and route management |
+| `Admin` | Statistics and system management |
+| `Type` | Trip types |
 
 ---
 
-## צילומי מסך
+## Screenshots
 
-### דף בית וגלישה
+### Home and browsing
 
-**דף בית** (`/home`)
+**Home page** (`/home`)
 
-![דף בית](docs/screenshots/01-home.png)
+![Home page](docs/screenshots/01-home.png)
 
-**רשימת טיולים + סינון** (`/trips`)
+**Trip catalog with filters** (`/trips`)
 
-![רשימת טיולים](docs/screenshots/02-trips-catalog.png)
-
----
-
-### פרטי טיול
-
-**כרטיס טיול** (`/trips/:id`)
-
-![פרטי טיול - כרטיס](docs/screenshots/03-trip-details-hero.png)
-
-![פרטי טיול - מידע](docs/screenshots/19-trip-details-cards.png)
-
-**תחנות במסלול**
-
-![תחנות במסלול](docs/screenshots/04-trip-stops.png)
-
-![תחנה במסלול](docs/screenshots/05-trip-stop-knesset.png)
-
-**גלריה, מפה וביקורות**
-
-![גלריית תמונות](docs/screenshots/07-trip-gallery.png)
-
-![מפת הטיול](docs/screenshots/06-trip-map.png)
-
-![ביקורות](docs/screenshots/08-trip-reviews.png)
-
-![רשימת ביקורות](docs/screenshots/09-trip-reviews-list.png)
+![Trip catalog](docs/screenshots/02-trips-catalog.png)
 
 ---
 
-### אשף תכנון טיול
+### Trip details
 
-**בחירת אזור** (`/tripPlan`)
+**Trip card** (`/trips/:id`)
 
-![אשף - אזור](docs/screenshots/10-wizard-region.png)
+![Trip details - card](docs/screenshots/03-trip-details-hero.png)
 
-**רמת קושי**
+![Trip details - info](docs/screenshots/19-trip-details-cards.png)
 
-![אשף - קושי](docs/screenshots/11-wizard-difficulty.png)
+**Route stops**
 
-**העדפות מיוחדות**
+![Route stops](docs/screenshots/04-trip-stops.png)
 
-![אשף - העדפות](docs/screenshots/12-wizard-preferences.png)
+![Route stop](docs/screenshots/05-trip-stop-knesset.png)
 
-**סיכום + תוצאות**
+**Gallery, map and reviews**
 
-![אשף - סיכום](docs/screenshots/13-wizard-summary.png)
+![Photo gallery](docs/screenshots/07-trip-gallery.png)
 
-![תוצאות המלצות](docs/screenshots/20-planning-results.png)
+![Trip map](docs/screenshots/06-trip-map.png)
 
----
+![Reviews](docs/screenshots/08-trip-reviews.png)
 
-### בניית טיול אישי
-
-**טופס פרטי הטיול** (`/BuildTrip`)
-
-![בניית טיול - טופס](docs/screenshots/14-build-trip-form.png)
-
-**תחנות המסלול**
-
-![בניית טיול - תחנות](docs/screenshots/15-build-trip-stations.png)
+![Review list](docs/screenshots/09-trip-reviews-list.png)
 
 ---
 
-### אזור אישי
+### Trip planning wizard
 
-**פרופיל וסטטיסטיקות** (`/me`)
+**Region** (`/tripPlan`)
 
-![אזור אישי](docs/screenshots/16-personal-area.png)
+![Wizard - region](docs/screenshots/10-wizard-region.png)
+
+**Difficulty**
+
+![Wizard - difficulty](docs/screenshots/11-wizard-difficulty.png)
+
+**Preferences**
+
+![Wizard - preferences](docs/screenshots/12-wizard-preferences.png)
+
+**Summary and results**
+
+![Wizard - summary](docs/screenshots/13-wizard-summary.png)
+
+![Recommendations](docs/screenshots/20-planning-results.png)
 
 ---
 
-### פאנל ניהול (Admin)
+### Custom trip builder
+
+**Trip details form** (`/BuildTrip`)
+
+![Trip builder - form](docs/screenshots/14-build-trip-form.png)
+
+**Route stops**
+
+![Trip builder - stops](docs/screenshots/15-build-trip-stations.png)
+
+---
+
+### Personal area
+
+**Profile and statistics** (`/me`)
+
+![Personal area](docs/screenshots/16-personal-area.png)
+
+---
+
+### Admin panel
 
 **Dashboard** (`/admin/dashboard`)
 
-![Admin Dashboard](docs/screenshots/17-admin-dashboard.png)
+![Admin dashboard](docs/screenshots/17-admin-dashboard.png)
 
-**ניהול מקומות** (`/admin/places`)
+**Place management** (`/admin/places`)
 
-![Admin - מקומות](docs/screenshots/18-admin-places.png)
+![Admin - places](docs/screenshots/18-admin-places.png)
 
-**טיולים ממתינים לאישור** (`/admin/trips/pending`)
+**Trips pending approval** (`/admin/trips/pending`)
 
-![Admin - טיולים ממתינים](docs/screenshots/21-admin-pending-trips.png)
+![Admin - pending trips](docs/screenshots/21-admin-pending-trips.png)
 
 ---
 
-## מבנה הפרויקט
+## Project structure
 
 ```
-ProjectTrips/
 ├── docs/
-│   └── screenshots/   # צילומי מסך לתיעוד
+│   └── screenshots/    # Screenshots for the documentation
 ├── public/
-├── src/
-│   ├── auth/           # Auth Context, Guards, JWT utilities
-├── component/      # קומפוננטות משותפות
-├── hooks/          # Custom React hooks
-├── layouts/        # Layout, NavBar, Footer, AdminLayout
-├── pages/          # דפי האפליקציה
-├── redux/          # Store, Slices, Thunks
-├── routes/         # Router + Paths
-├── sections/       # מקטעים לפי feature (wizard, trip, filters)
-├── services/       # קריאות API (Axios)
-├── types/          # TypeScript interfaces
-└── utils/          # פונקציות עזר
+└── src/
+    ├── auth/           # Auth context, guards, JWT utilities
+    ├── component/      # Shared components
+    ├── hooks/          # Custom React hooks
+    ├── layouts/        # Layout, NavBar, Footer, AdminLayout
+    ├── pages/          # App pages
+    ├── redux/          # Store, slices, thunks
+    ├── routes/         # Router and paths
+    ├── sections/       # Feature sections (wizard, trip, filters)
+    ├── services/       # API calls (Axios)
+    ├── types/          # TypeScript interfaces
+    └── utils/          # Helper functions
 ```
 
 ---
 
-## סקריפטים
+## Scripts
 
-| פקודה | תיאור |
+| Command | Description |
 |-------|--------|
-| `npm run dev` | הרצה ב-Development עם HMR |
-| `npm run build` | Build ל-Production |
-| `npm run preview` | תצוגה מקדימה של ה-Build |
-| `npm run lint` | בדיקת ESLint |
+| `npm run dev` | Development server with HMR |
+| `npm run build` | Production build |
+| `npm run preview` | Preview the build |
+| `npm run lint` | Run ESLint |
 
 ---
 
-## מסכים ונתיבים
+## Screens and routes
 
-| נתיב | מסך | הרשאה |
+| Route | Screen | Access |
 |------|-----|--------|
-| `/home` | דף בית | כולם |
-| `/trips` | רשימת טיולים | כולם |
-| `/trips/:id` | פרטי טיול | כולם |
-| `/tripPlan` | אשף תכנון טיול | כולם |
-| `/planningResultPage` | תוצאות המלצות | כולם |
-| `/BuildTrip` | בניית טיול חדש | כולם |
-| `/BuildTrip/:tripId` | עריכת טיול | כולם |
-| `/me` | אזור אישי | משתמש מחובר |
-| `/login` | התחברות | כולם |
-| `/register` | הרשמה | כולם |
-| `/about` | אודות | כולם |
-| `/contact` | צור קשר | כולם |
+| `/home` | Home page | Everyone |
+| `/trips` | Trip catalog | Everyone |
+| `/trips/:id` | Trip details | Everyone |
+| `/tripPlan` | Trip planning wizard | Everyone |
+| `/planningResultPage` | Recommendations | Everyone |
+| `/BuildTrip` | New trip | Everyone |
+| `/BuildTrip/:tripId` | Edit trip | Everyone |
+| `/me` | Personal area | Signed-in users |
+| `/login` | Login | Everyone |
+| `/register` | Sign-up | Everyone |
+| `/about` | About | Everyone |
+| `/contact` | Contact | Everyone |
 | `/admin/dashboard` | Dashboard | Admin |
-| `/admin/trips` | ניהול טיולים | Admin |
-| `/admin/trips/pending` | טיולים ממתינים | Admin |
-| `/admin/places` | ניהול מקומות | Admin |
-| `/admin/users` | ניהול משתמשים | Admin |
+| `/admin/trips` | Trip management | Admin |
+| `/admin/trips/pending` | Pending trips | Admin |
+| `/admin/places` | Place management | Admin |
+| `/admin/users` | User management | Admin |
 
 ---
 
-## תמיכה ומשוב
+## Feedback
 
-לשאלות, באגים או הצעות — פתחי **Issue** ב-GitHub.  
-ניתן גם לפנות דרך דף **צור קשר** (`/contact`) בתוך האפליקציה.
+For questions, bugs or suggestions, open an **issue** on GitHub.

@@ -36,13 +36,13 @@ export default function RegionSelection({ value, onChange }: Props) {
     const getBorderColor = (level: number) => {
         switch (level) {
             case 0:
-                return 'border-[#e5e7eb]'; // הכי בהיר
+                return 'border-[#e5e7eb]'; // lightest
             case 1:
                 return 'border-[#d1d5db]';
             case 2:
                 return 'border-[#9ca3af]';
             default:
-                return 'border-[#6b7280]'; // עמוק יותר
+                return 'border-[#6b7280]'; // darker
         }
     };
 

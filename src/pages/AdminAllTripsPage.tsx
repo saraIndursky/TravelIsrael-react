@@ -73,9 +73,9 @@ export default function AdminAllTripsPage() {
     const getActionIcon = (trip: AllTripType) => {
         const mode = getActionMode(trip);
 
-        if (mode === 'disabled') return CheckCircle2; // מאושר
-        if (mode === 'review') return AlertCircle;     // ממתין
-        if (mode === 'rejected') return XCircle;       // נדחה
+        if (mode === 'disabled') return CheckCircle2; // approved
+        if (mode === 'review') return AlertCircle;     // pending
+        if (mode === 'rejected') return XCircle;       // rejected
 
         return AlertCircle;
     };
@@ -290,10 +290,6 @@ export default function AdminAllTripsPage() {
                                                 >
                                                     <BarChart3 className="w-4 h-4" />
                                                 </button>
-                                                {/* <button className="p-2 text-[#6b7280] hover:bg-[#f3f4f6] rounded-lg transition-colors" title="ערוך">
-                                                    <Eye className="w-4 h-4" />
-                                                </button> */}
-                                                {/* <ActionButton trip={trip} /> */}
                                                 {(() => {
                                                     const ActionIcon = getActionIcon(trip);
                                                     return (

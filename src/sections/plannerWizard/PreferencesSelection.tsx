@@ -17,7 +17,6 @@ export default function PreferencesSection({
 
             <div className="space-y-6">
 
-                {/* יום גשום */}
                 <label className="flex items-center gap-4 p-6 border-2 border-[#e5e7eb] rounded-sm hover:border-[#d1d5db] cursor-pointer transition-all">
                     <input
                         type="checkbox"
@@ -37,7 +36,6 @@ export default function PreferencesSection({
                     </div>
                 </label>
 
-                {/* מחיר מקסימלי */}
                 <div className="p-6 border-2 border-[#e5e7eb] rounded-sm">
                     <div className="flex items-center gap-3 mb-4">
                         <span className="text-[#111827] font-medium">
@@ -66,7 +64,6 @@ export default function PreferencesSection({
                     </div>
                 </div>
 
-                {/* משך זמן */}
                 <div className="p-6 border-2 border-[#e5e7eb] rounded-sm">
                     <div className="flex items-center gap-3 mb-4">
                         <span className="text-[#111827] font-medium">

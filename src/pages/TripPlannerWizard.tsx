@@ -147,7 +147,6 @@ export default function TripPlannerWizard() {
 
                         <div className="bg-[#f9fafb] border border-[#e5e7eb] rounded-sm p-8 space-y-6">
 
-                            {/* אזור */}
                             {planData.regionId && (
                                 <div className="flex items-start gap-4">
                                     <MapPin className="w-5 h-5 text-[#6b7280] mt-0.5" />
@@ -163,7 +162,6 @@ export default function TripPlannerWizard() {
                                 </div>
                             )}
 
-                            {/* רמת קושי */}
                             {planData.difficulty !== null && (
                                 <div className="flex items-start gap-4">
                                     <TrendingUp className="w-5 h-5 text-[#6b7280] mt-0.5" />
@@ -179,7 +177,6 @@ export default function TripPlannerWizard() {
                                 </div>
                             )}
 
-                            {/* רמת נגישות */}
                             {planData.accessibility !== null && (
                                 <div className="flex items-start gap-4">
                                     <Accessibility className="w-5 h-5 text-[#6b7280] mt-0.5" />
@@ -195,7 +192,6 @@ export default function TripPlannerWizard() {
                                 </div>
                             )}
 
-                            {/* סוג טיול */}
                             {planData.typeId && (
                                 <div className="flex items-start gap-4">
                                     <MdHiking className="w-5 h-5 text-[#6b7280] mt-0.5" />
@@ -211,7 +207,6 @@ export default function TripPlannerWizard() {
                                 </div>
                             )}
 
-                            {/* יום גשום */}
                             {planData.isRainyDay === true && (
                                 <div className="flex items-start gap-4">
                                     <CloudRain className="w-5 h-5 text-[#6b7280] mt-0.5" />
@@ -226,7 +221,6 @@ export default function TripPlannerWizard() {
                                 </div>
                             )}
 
-                            {/* מחיר מקסימלי */}
                             {planData.maxPrice && (
                                 <div className="flex items-start gap-4">
                                     <DollarSign className="w-5 h-5 text-[#6b7280] mt-0.5" />
@@ -239,7 +233,6 @@ export default function TripPlannerWizard() {
                                 </div>
                             )}
 
-                            {/* משך זמן */}
                             {planData.availableHours && (
                                 <div className="flex items-start gap-4">
                                     <Clock className="w-5 h-5 text-[#6b7280] mt-0.5" />
@@ -253,7 +246,7 @@ export default function TripPlannerWizard() {
                             )}
                         </div>
 
-                        {/* קריאה לפעולה */}
+                        {/* Call to action */}
                         <div className="mt-8 p-6 bg-[#f0fdf4] border border-[#86efac] rounded-sm">
                             <div className="flex items-start gap-3">
                                 <Compass className="w-5 h-5 text-[#059669] mt-0.5" />
@@ -382,7 +375,7 @@ export default function TripPlannerWizard() {
                             </button>
                         ) : (
                             <div className="flex gap-3">
-                                {/* כפתור משני - תכנן טיול אישי */}
+                                {/* Secondary button - plan a custom trip */}
                                 <button
                                     onClick={() => navigate('/buildTrip')}
                                     className="flex items-center gap-2 border border-[#059669] text-[#059669] px-6 py-3 rounded-sm text-sm font-medium hover:bg-[#d1fae5] transition-colors"
@@ -391,7 +384,7 @@ export default function TripPlannerWizard() {
                                     <Map className="w-4 h-4" />
                                 </button>
 
-                                {/* כפתור ראשי - מצא לי טיול */}
+                                {/* Primary button - find me a trip */}
                                 <button
                                     onClick={handleFindTrips}
                                     className="flex items-center gap-2 bg-[#059669] text-[#ffffff] px-6 py-3 rounded-sm text-sm font-medium hover:bg-[#047857] transition-colors"
