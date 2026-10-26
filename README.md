@@ -3,8 +3,8 @@
 פלטפורמת **TravelIsrael** לגלישה, תכנון ויצירת טיולים בישראל.  
 האפליקציה מאפשרת למשתמשים לגלות מסלולים קיימים, לקבל המלצות מותאמות אישית, לבנות טיול משלהם, ולנהל את הפעילות שלהם — עם פאנל ניהול מלא למנהלי המערכת.
 
-> **Repository זה:** [TravelIsrael-react](https://github.com/injosh2026/TravelIsrael-react)  
-> **Backend (.NET 8):** [TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet)
+> **Repository זה:** [TravelIsrael-react](https://github.com/saraIndursky/TravelIsrael-react)  
+> **Backend (.NET 8):** [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)
 
 **פרויקט לימודי** — נבנה בזוגות במסגרת קורס.
 
@@ -87,17 +87,17 @@
 
 | מה | איפה |
 |----|------|
-| **הנתונים עצמם** (טיולים, מקומות, משתמשים…) | גיבוי `Database/projectTripDB.bak` ב-[TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet) — שחזור ב-SSMS |
-| **מבנה הטבלאות (Schema)** | EF Core Migrations — בתיקייה `ProjectTripsDB/Migrations/` ב-repo **[TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet)** |
+| **הנתונים עצמם** (טיולים, מקומות, משתמשים…) | גיבוי `Database/projectTripDB.bak` ב-[TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet) — שחזור ב-SSMS |
+| **מבנה הטבלאות (Schema)** | EF Core Migrations — בתיקייה `ProjectTripsDB/Migrations/` ב-repo **[TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)** |
 | **משתמש Admin ראשוני** | נוצר אוטומטית ב-Migration (Seed) |
 
 ### איך מריצים עם נתונים?
 
 **שלב 1 — שחזור מסד עם נתונים (מומלץ):**
 
-1. Clone את [TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet)
+1. Clone את [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)
 2. ב-SSMS: **Restore Database** מ-`Database/projectTripDB.bak` → שם: `ProjectTripsDB`
-3. פירוט: [Database/README.md](https://github.com/injosh2026/TravelIsrael-dotnet/blob/main/Database/README.md)
+3. פירוט: [Database/README.md](https://github.com/saraIndursky/TravelIsrael-dotnet/blob/main/Database/README.md)
 
 **שלב 1 (חלופי) — רק טבלאות + Admin, בלי נתוני דוגמה:**
 
@@ -144,7 +144,7 @@ dotnet ef database update --project ProjectTripsDB --startup-project ProjectTrip
 ### 1. Clone
 
 ```bash
-git clone https://github.com/injosh2026/TravelIsrael-react.git
+git clone https://github.com/saraIndursky/TravelIsrael-react.git
 cd TravelIsrael-react
 ```
 
@@ -156,7 +156,7 @@ npm install
 
 ### 3. הרצת Backend + DB
 
-1. Clone את [TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet)
+1. Clone את [TravelIsrael-dotnet](https://github.com/saraIndursky/TravelIsrael-dotnet)
 2. שחזרי מ-`Database/projectTripDB.bak` (ראו [מסד הנתונים](#מסד-הנתונים))
 3. הריצי את שרת ה-API:
 
