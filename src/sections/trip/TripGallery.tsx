@@ -7,7 +7,7 @@ function collectImages(trip: DayTripDetailType) {
 
     // images.push(trip.image)
 
-    // בדיקה דיפנסיבית - אם אין dayTripItems או זה לא מערך
+    // Guard against missing or non-array dayTripItems
     if (!trip.dayTripItems || !Array.isArray(trip.dayTripItems)) {
         return images
     }
@@ -92,7 +92,7 @@ export default function TripGallery({ trip }: Props) {
                             className="w-full max-h-[80vh] object-contain rounded"
                         />
 
-                        {/* כפתורי ניווט */}
+                        {/* Navigation buttons */}
                         <button
                             onClick={prev}
                             className="absolute right-4 top-1/2 -translate-y-1/2
@@ -123,7 +123,7 @@ export default function TripGallery({ trip }: Props) {
                             <ChevronLeft size={28} className="text-white" />
                         </button>
 
-                        {/* כפתור סגירה */}
+                        {/* Close button */}
                         <button
                             onClick={() => setIsOpen(false)}
                             className="absolute top-0 right-4

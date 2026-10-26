@@ -114,7 +114,7 @@ export default function AdminPlacesPage() {
       else
         await approvePlace(place.id, { approvalStatus: 2, rejectReason: null });
 
-      // עדכון UI בלי ריפרש
+      // Update the UI without reloading
       setPlaces(prev =>
         prev.map(item =>
           item.id === place.id && item.itemType === place.itemType
@@ -410,7 +410,7 @@ export default function AdminPlacesPage() {
               return (
                 <div key={`${place.type}-${place.id}`} className="p-4">
 
-                  {/* 🔝 חלק עליון */}
+                  {/* Top section */}
                   <div className="flex gap-4">
 
                     <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
@@ -446,7 +446,7 @@ export default function AdminPlacesPage() {
                     </div>
                   </div>
 
-                  {/* 🔻 חלק תחתון - כפתורים */}
+                  {/* Bottom section - buttons */}
                   <div className="mt-3 flex items-center gap-2">
 
                     {actions.primary && (

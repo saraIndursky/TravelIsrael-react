@@ -1,4 +1,4 @@
-//להגן על עמודים שדורשים משתמש מחובר
+// Protects pages that require an admin user
 import { Navigate } from "react-router-dom"
 import { useAuthContext } from "../auth/useAuthContext"
 

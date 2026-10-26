@@ -1,6 +1,6 @@
 export function formatTripDuration(hours: number) {
         if (hours <= 0) return "0 שעות";
-        // עיגול לשעה הקרובה
+        // Round to the nearest hour
         const totalHours = Math.round(hours);
 
         const days = Math.floor(totalHours / 24);

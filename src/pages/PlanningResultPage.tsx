@@ -17,16 +17,13 @@ export default function PlanningResultPage() {
   const [currentTripIndex, setCurrentTripIndex] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
 
-  // שליפת הטיולים מה‑Redux
   const { trips, loading, error } = useSelector((state: RootState) => state.planner);
 
-  // בדיקות בסיסיות
   if (loading) return <div>טוען...</div>;
   if (error) return <div>שגיאה: {error}</div>;
   if (!trips.length) return <div>לא נמצאו טיולים</div>;
 
 
-  // הטיול הנוכחי
   const current: RecommendedTrip = trips[currentTripIndex];
   const trip = current.trip;
   const match = current.matchPercentage;

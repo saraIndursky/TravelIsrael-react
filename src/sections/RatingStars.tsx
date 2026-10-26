@@ -19,10 +19,10 @@ export default function RatingStars({ rating }: Props) {
       return (
         <div key={star} className="relative w-5 h-5">
 
-          {/* כוכב אפור בסיס */}
+          {/* Gray base star */}
           <Star className="absolute w-5 h-5 text-gray-300" />
 
-          {/* מילוי מדויק */}
+          {/* Partial fill */}
           <div
             className="absolute top-0 right-0 overflow-hidden"
             style={{ width: `${fillPercent}%` }}

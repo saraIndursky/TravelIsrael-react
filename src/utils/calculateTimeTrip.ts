@@ -7,10 +7,10 @@ type Location = {
 
 type TravelMode = 0 | 1 | 2
 
-// פונקציה שמקבלת מספר מהשרת ומחזירה TravelMode בטוח
+// Converts the server's number to a valid TravelMode
 function toTravelMode(mode: number): TravelMode {
   if (mode === 0 || mode === 1 || mode === 2) return mode
-  return 0 // ברירת מחדל אם משהו לא תקין
+  return 0 // Default when the value is invalid
 }
 
 function getDistanceKm(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -33,9 +33,9 @@ function getDistanceKm(lat1: number, lon1: number, lat2: number, lon2: number) {
 function getTravelMinutes(distanceKm: number, mode: TravelMode) {
 
   const speeds: Record<TravelMode, number> = {
-    0: 5,   // הליכה km/h
-    1: 60,  // רכב
-    2: 15   // אופניים
+    0: 5,   // walking, km/h
+    1: 60,  // car
+    2: 15   // bicycle
   }
 
   const speed = speeds[mode] ?? 5
@@ -64,7 +64,7 @@ function getStopLocation(stop: any): Location | null {
   return null
 }
 
-//פונקציה לעיגול שעה
+// Rounds to the nearest half hour
 function roundToHalfHour(date: Date) {
   const newDate = new Date(date)
 
@@ -83,7 +83,6 @@ function roundToHalfHour(date: Date) {
   return newDate
 }
 
-//פורמט השעה
 function formatTime(date: Date) {
   return date.toLocaleTimeString("he-IL", {
     hour: "2-digit",
@@ -91,7 +90,6 @@ function formatTime(date: Date) {
   })
 }
 
-//פורמט משך זמן
 export function formatDuration(minutes: number) {
   const hours = minutes / 60
 
@@ -105,7 +103,7 @@ export function formatDuration(minutes: number) {
 
 export function calculateStopsTimes(trip: DayTripDetailType) {
 
-  // בדיקה דיפנסיבית - אם אין dayTripItems או זה לא מערך, החזר מערך ריק
+  // Guard against missing or non-array dayTripItems
   if (!trip.dayTripItems || !Array.isArray(trip.dayTripItems)) {
     return []
   }
@@ -166,7 +164,7 @@ export function calculateStopsTimes(trip: DayTripDetailType) {
 
 
 
-//פורמט מרחק + אופן הגעה
+// Formats the distance and travel mode
 function formatDistance(distanceKm: number, mode: number) {
   const rounded = Math.round(distanceKm * 10) / 10
 
@@ -181,7 +179,7 @@ function formatDistance(distanceKm: number, mode: number) {
 }
 
 export function calculateDistances(trip: DayTripDetailType) {
-  // בדיקה דיפנסיבית - אם אין dayTripItems או זה לא מערך, החזר מערך ריק
+  // Guard against missing or non-array dayTripItems
   if (!trip.dayTripItems || !Array.isArray(trip.dayTripItems)) {
     return []
   }
@@ -235,12 +233,12 @@ export function calculateTotalTripMinutes(trip: DayTripDetailType) {
 
     const current = stops[i]
 
-    // זמן התחנה עצמה
+    // Time spent at the stop itself
     totalMinutes += current.estimatedDuration
 
     const next = stops[i + 1]
 
-    // אם אין תחנה הבאה → אין זמן מעבר
+    // No next stop, so no travel time
     if (!next) continue
 
     const loc1 = getExitLocation(current)

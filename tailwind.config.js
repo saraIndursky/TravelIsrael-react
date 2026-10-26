@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        'sm2': '700px', // breakpoint מותאם אישית ב־900px
+        'sm2': '700px', // custom breakpoint
         '3xl': '1445px',
         'md2': '1030px',
       },

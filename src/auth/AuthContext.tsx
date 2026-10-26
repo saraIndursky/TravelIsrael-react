@@ -36,8 +36,8 @@ export const AuthProvider = ({ children }: Props) => {
   }, [])
 
   const logout = () => {
-    setAuthState({ user: null }) // מחיקת המשתמש מהקונטקסט
-    removeSession() // קריאה לפונקציה שלך שמוחקת טוקן מהlocalStorage ומאפס את axios
+    setAuthState({ user: null })
+    removeSession() // Clears the token from localStorage and resets axios
   }
 
   return (

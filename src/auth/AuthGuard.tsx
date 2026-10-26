@@ -1,4 +1,4 @@
-//להגן על עמודים שדורשים משתמש מחובר
+// Protects pages that require a signed-in user
 import { Navigate } from "react-router-dom"
 import { useAuthContext } from "../auth/useAuthContext"
 

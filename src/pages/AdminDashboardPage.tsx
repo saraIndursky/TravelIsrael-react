@@ -76,7 +76,7 @@ export default function AdminDashboard() {
         loadStats()
     }, [])
 
-    // סטטיסטיקות מהירות (אופציונלי)
+    // Quick stats
     const stats = [
         {
             label: 'סך הטיולים',
