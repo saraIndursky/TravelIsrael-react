@@ -105,11 +105,9 @@ It runs on **SQL Server** (default: `(localdb)\MSSQLLocalDB`) on the developer's
 ```bash
 dotnet ef database update --project ProjectTripsDB --startup-project ProjectTrips
 ```
+**Admin User:**
 
-| Field | Value |
-|-----|-----|
-| Email | `Admin@gmail.com` |
-| Password | `Admin#613` |
+A default admin user is created by the database seed. Change its password after the first login
 
 > **Note:** the connection string is set in the backend in `ProjectTripsDB/Models/ProjectTripsDataBase.cs`.  
 > If your SQL Server runs elsewhere, update it before restoring or running migrations.
